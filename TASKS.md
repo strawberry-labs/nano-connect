@@ -91,7 +91,7 @@
 
 ---
 
-### ⏳ Task 1.1.4: Set Up Redis Cache
+### 🚧 Task 1.1.4: Set Up Redis Cache
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 3 hours
@@ -99,8 +99,8 @@
 **Description**: Configure Redis for session and message caching.
 
 **Acceptance Criteria**:
-- [ ] Install `@nestjs/cache-manager` and `cache-manager-redis-store`
-- [ ] Configure Redis connection in `CacheModule`
+- [x] Install `@nestjs/cache-manager` and `cache-manager`
+- [x] Configure Redis connection in `CacheModule`
 - [ ] Set default TTL to 24 hours for messages
 - [ ] Configure connection retry logic (max 3 retries)
 - [ ] Create `RedisService` wrapper for custom operations

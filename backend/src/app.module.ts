@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config/schema';
+import { CacheModule } from '@nestjs/cache-manager';
+import KeyvRedis from '@keyv/redis';
 
 @Module({
     imports: [
@@ -56,6 +58,13 @@ import { configValidationSchema } from './config/schema';
                     migrationsRun: false,
                 };
             },
+        }),
+        CacheModule.registerAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: (configService: ConfigService) => ({
+                stores: [new KeyvRedis(configService.get<string>('REDIS_URL'))],
+            }),
         }),
     ],
     controllers: [AppController],
