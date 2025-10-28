@@ -24,7 +24,7 @@
 
 ## 1.1 Project Setup & Infrastructure
 
-### ⏳ Task 1.1.1: Initialize NestJS Backend Project
+### 🚧 Task 1.1.1: Initialize NestJS Backend Project
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 2 hours
@@ -44,7 +44,7 @@
 
 ---
 
-### ⏳ Task 1.1.2: Configure Environment Variables
+### 🚧 Task 1.1.2: Configure Environment Variables
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 2 hours
@@ -52,8 +52,8 @@
 **Description**: Set up configuration management with validation using `@nestjs/config`.
 
 **Acceptance Criteria**:
-- [ ] Install `@nestjs/config` and `joi` for validation
-- [ ] Create `.env.example` with all required variables:
+- [x] Install `@nestjs/config` and `joi` for validation
+- [x] Create `.env.example` with all required variables:
   - `NODE_ENV` (development/staging/production)
   - `PORT` (default: 3000)
   - `DATABASE_URL`
@@ -64,7 +64,7 @@
 - [ ] Create `config/configuration.ts` with type-safe config
 - [ ] Add Joi schema validation in `app.module.ts`
 - [ ] Application fails fast if required config is missing
-- [ ] Add `.env` to `.gitignore`
+- [x] Add `.env` to `.gitignore`
 
 **Dependencies**: Task 1.1.1
 
