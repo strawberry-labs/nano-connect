@@ -101,10 +101,10 @@
 **Acceptance Criteria**:
 - [x] Install `@nestjs/cache-manager` and `cache-manager`
 - [x] Configure Redis connection in `CacheModule`
-- [ ] Set default TTL to 24 hours for messages
+- [x] Set default TTL to 24 hours for messages
 - [ ] Configure connection retry logic (max 3 retries)
 - [ ] Create `RedisService` wrapper for custom operations
-- [ ] Test Redis connection on app startup
+- [x] Test Redis connection on app startup
 - [ ] Add health check for Redis connectivity
 - [ ] Document Redis usage patterns
 
