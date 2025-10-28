@@ -44,7 +44,7 @@
 
 ---
 
-### 🚧 Task 1.1.2: Configure Environment Variables
+### ✅ Task 1.1.2: Configure Environment Variables
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 2 hours
@@ -61,9 +61,9 @@
   - `JWT_SECRET`
   - `JWT_EXPIRY`
   - `CORS_ORIGINS`
-- [ ] Create `config/configuration.ts` with type-safe config
-- [ ] Add Joi schema validation in `app.module.ts`
-- [ ] Application fails fast if required config is missing
+- [x] Create `config/configuration.ts` with type-safe config
+- [x] Add Joi schema validation in `app.module.ts`
+- [x] Application fails fast if required config is missing
 - [x] Add `.env` to `.gitignore`
 
 **Dependencies**: Task 1.1.1
