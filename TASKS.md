@@ -32,13 +32,13 @@
 **Description**: Bootstrap the NestJS backend application with TypeScript configuration.
 
 **Acceptance Criteria**:
-- [ ] Run `nest new backend` with TypeScript template
-- [ ] Configure `tsconfig.json` with strict mode enabled
-- [ ] Set up ESLint with `@typescript-eslint` rules
-- [ ] Configure Prettier with consistent formatting rules
+- [x] Run `nest new backend` with TypeScript template
+- [x] Configure `tsconfig.json` with strict mode enabled
+- [x] Set up ESLint with `@typescript-eslint` rules
+- [x] Configure Prettier with consistent formatting rules
 - [ ] Add `.editorconfig` for cross-IDE consistency
-- [ ] Verify `npm run build` compiles successfully
-- [ ] Verify `npm run start:dev` runs in watch mode
+- [x] Verify `npm run build` compiles successfully
+- [x] Verify `npm run start:dev` runs in watch mode
 
 **Dependencies**: None
 
