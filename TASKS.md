@@ -105,7 +105,7 @@
 - [ ] Configure connection retry logic (max 3 retries)
 - [x] Create `RedisService` wrapper for custom operations
 - [x] Test Redis connection on app startup
-- [ ] Add health check for Redis connectivity
+- [x] Add health check for Redis connectivity
 - [ ] Document Redis usage patterns
 
 **Dependencies**: Task 1.1.2

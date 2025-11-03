@@ -62,13 +62,27 @@ export class RedisService {
     }
 
     async onModuleDestroy() {
-        if (this.client) {
-            await this.client.quit();
-            if (this.publisher && this.subscriber) {
-                await this.publisher.quit();
-                await this.subscriber.quit();
-            }
+        try {
+            if (this.client) await this.client.quit();
+            if (this.publisher) await this.publisher.quit();
+            if (this.subscriber) await this.subscriber.quit();
             this.logger.log('Redis connections closed');
+        } catch (err) {
+            this.logger.error(`Error closing Redis connections`, err);
+        }
+    }
+
+    async checkHealth(): Promise<{ status: string; latency?: number }> {
+        if (!this.client?.isOpen) return { status: 'down' };
+
+        const start = Date.now();
+        try {
+            await this.client.ping();
+            const latency = Date.now() - start;
+            return { status: 'healthy', latency };
+        } catch (e) {
+            this.logger.error(`Redis health check failed`, e);
+            return { status: 'down' };
         }
     }
 
