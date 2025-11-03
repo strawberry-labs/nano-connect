@@ -106,7 +106,7 @@
 - [x] Create `RedisService` wrapper for custom operations
 - [x] Test Redis connection on app startup
 - [x] Add health check for Redis connectivity
-- [ ] Document Redis usage patterns
+- [x] Document Redis usage patterns
 
 **Dependencies**: Task 1.1.2
 
