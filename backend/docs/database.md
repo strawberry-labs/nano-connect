@@ -37,4 +37,4 @@ You can replace `user`, `password`, and `nanoconnect` with your preferred Postgr
 
 ## Step 2: Configure Environment Variables
 Update the `.env` file in the `backend` directory with your PostgreSQL connection details (`DATABASE_URL`).
-If you ran the same command as above, you can use `.env.example` with no changes.
+If you run the same command as above, you can use `.env.example` with no changes.
