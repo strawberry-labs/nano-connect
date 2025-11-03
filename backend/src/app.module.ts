@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config/schema';
 import { RedisModule } from './redis/redis.module';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
     imports: [
@@ -65,6 +66,15 @@ import { RedisModule } from './redis/redis.module';
                     url: configService.get<string>('REDIS_URL'),
                     ttl: 86400, // 24 hours
                 };
+            },
+        }),
+        LoggerModule.forRoot({
+            pinoHttp: {
+                level: process.env.LOG_LEVEL || 'info',
+                transport:
+                    process.env.NODE_ENV !== 'production'
+                        ? { target: 'pino-pretty', options: { colorize: true } }
+                        : undefined,
             },
         }),
     ],
