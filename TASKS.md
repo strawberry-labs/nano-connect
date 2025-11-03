@@ -70,7 +70,7 @@
 
 ---
 
-### 🚧 Task 1.1.3: Set Up PostgreSQL Database
+### ✅ Task 1.1.3: Set Up PostgreSQL Database
 **Complexity**: Medium
 **Priority**: P0 (Critical)
 **Estimated Time**: 4 hours
@@ -80,11 +80,11 @@
 **Acceptance Criteria**:
 - [x] Install `@nestjs/typeorm`, `typeorm`, and `pg`
 - [x] Configure TypeORM in `app.module.ts` with connection pooling
-- [ ] Set up separate configs for dev/staging/prod
+- [x] Set up separate configs for dev/staging/prod
 - [x] Configure connection pool (min: 2, max: 20)
 - [x] Enable query logging in development
 - [x] Test database connection on app startup
-- [ ] Create initial migration setup with TypeORM CLI
+- [x] Create initial migration setup with TypeORM CLI
 - [x] Document database setup in `docs/database.md`
 
 **Dependencies**: Task 1.1.2
@@ -144,34 +144,9 @@
 **Description**: Design and document the complete database schema.
 
 **Acceptance Criteria**:
-- [ ] Create ERD (Entity Relationship Diagram) with Draw.io
-- [ ] Define `sessions` table:
-  - `id` (UUID, primary key)
-  - `topic` (VARCHAR, unique, indexed)
-  - `dapp_public_key` (VARCHAR)
-  - `wallet_public_key` (VARCHAR, nullable)
-  - `accounts` (JSONB array)
-  - `permissions` (JSONB array)
-  - `dapp_metadata` (JSONB)
-  - `wallet_metadata` (JSONB, nullable)
-  - `state` (ENUM: pending/active/expired/disconnected)
-  - `created_at` (TIMESTAMP)
-  - `expires_at` (TIMESTAMP, indexed)
-  - `last_activity` (TIMESTAMP)
-- [ ] Define `messages` table:
-  - `id` (UUID, primary key)
-  - `topic` (VARCHAR, indexed)
-  - `type` (ENUM: request/response/event)
-  - `payload` (JSONB)
-  - `timestamp` (TIMESTAMP)
-  - `ttl` (INTEGER)
-  - `delivered` (BOOLEAN, default false)
-- [ ] Add indexes for performance:
-  - `sessions.topic` (unique)
-  - `sessions.expires_at`
-  - `messages.topic`
-  - `messages.delivered`
-- [ ] Document schema in `docs/database-schema.md`
+<!-- - [ ] Create ERD (Entity Relationship Diagram) with Draw.io | there's no relationships yet -->
+- [ ] Define `registered_apps` table with all fields
+- [x] Document schema in `docs/database-schema.md`
 
 **Dependencies**: Task 1.1.3
 
