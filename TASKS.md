@@ -194,7 +194,7 @@
 
 ---
 
-### ⏳ Task 1.2.4: Generate Initial Migrations
+### 🚧 Task 1.2.4: Generate Initial Migrations
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 1 hour
@@ -202,11 +202,11 @@
 **Description**: Create TypeORM migrations for initial schema.
 
 **Acceptance Criteria**:
-- [ ] Run `npm run typeorm migration:generate -- -n InitialSchema`
-- [ ] Review generated SQL for correctness
-- [ ] Test migration up: `npm run typeorm migration:run`
-- [ ] Test migration down: `npm run typeorm migration:revert`
-- [ ] Add migration scripts to `package.json`
+- [x] Run `npm run typeorm migration:generate -- -n InitialSchema`
+- [x] Review generated SQL for correctness
+- [x] Test migration up: `npm run typeorm migration:run`
+- [x] Test migration down: `npm run typeorm migration:revert`
+- [x] Add migration scripts to `package.json`
 - [ ] Document migration workflow in README
 
 **Dependencies**: Tasks 1.2.2, 1.2.3
@@ -215,7 +215,7 @@
 
 ## 1.3 WebSocket Infrastructure
 
-### ⏳ Task 1.3.1: Set Up WebSocket Gateway
+### 🚧 Task 1.3.1: Set Up WebSocket Gateway
 **Complexity**: Medium
 **Priority**: P0 (Critical)
 **Estimated Time**: 6 hours
@@ -223,20 +223,20 @@
 **Description**: Implement WebSocket server using NestJS Gateway.
 
 **Acceptance Criteria**:
-- [ ] Install `@nestjs/websockets`, `@nestjs/platform-socket.io`, `socket.io`
-- [ ] Create `src/relay/relay.gateway.ts`
-- [ ] Configure Socket.io with options:
-  - CORS with allowed origins from env
+- [x] Install `@nestjs/websockets`, `@nestjs/platform-socket.io`, `socket.io`
+- [x] Create `src/relay/relay.gateway.ts`
+- [x] Configure Socket.io with options:
+  - CORS with allowed origins from env <!-- Sidenote: This should be configured to allow every origin as relay should be accessible from any domain -->
   - Transport: WebSocket only (no polling)
-  - Path: `/socket.io`
+  - Path: `/relay`
   - Max message size: 100KB
 - [ ] Implement connection lifecycle:
   - `handleConnection(client)` - log connection with client ID
   - `handleDisconnect(client)` - cleanup subscriptions
-- [ ] Store client connections in memory (Map<clientId, Socket>)
+- [x] Store client connections in memory (Map<clientId, Socket>)
 - [ ] Add connection rate limiting (max 10/minute per IP)
 - [ ] Emit `connected` event to client with server info
-- [ ] Log all connections/disconnections with timestamp
+- [x] Log all connections/disconnections with timestamp
 
 **Dependencies**: Task 1.1.2
 

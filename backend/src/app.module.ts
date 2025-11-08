@@ -6,6 +6,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configValidationSchema } from './config/schema';
 import { RedisModule } from './redis/redis.module';
 import { LoggerModule } from 'nestjs-pino';
+import { RelayModule } from './relay/relay.module';
 
 @Module({
     imports: [
@@ -77,6 +78,7 @@ import { LoggerModule } from 'nestjs-pino';
                         : undefined,
             },
         }),
+        RelayModule,
     ],
     controllers: [AppController],
     providers: [AppService],
