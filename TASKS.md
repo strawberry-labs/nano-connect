@@ -235,7 +235,7 @@
   - `handleDisconnect(client)` - cleanup subscriptions
 - [x] Store client connections in memory (Map<clientId, Socket>)
 - [ ] Add connection rate limiting (max 10/minute per IP)
-- [ ] Emit `connected` event to client with server info
+- [x] Emit `connected` event to client with server info
 - [x] Log all connections/disconnections with timestamp
 
 **Dependencies**: Task 1.1.2
