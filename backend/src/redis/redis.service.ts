@@ -22,8 +22,10 @@ type RedisClient = RedisClientType<
 export class RedisService {
     private readonly logger = new Logger(RedisService.name);
 
+    // main client
     private client: RedisClient | undefined;
 
+    // pub/sub clients
     public publisher: RedisClient | undefined;
     public subscriber: RedisClient | undefined;
 
@@ -43,6 +45,7 @@ export class RedisService {
             this.logger.error(e);
         });
 
+        // Connect all clients
         void this.client.connect();
         void this.subscriber.connect();
         void this.publisher.connect();
@@ -52,7 +55,29 @@ export class RedisService {
     }
 
     onModuleInit() {
-        this.client = createClient(this.options);
+        const clientOptions = {
+            ...this.options,
+            socket: {
+                ...this.options.socket,
+                reconnectStrategy: (retries: number) => {
+                    if (retries > 3) {
+                        this.logger.error(
+                            'Max Redis connection retries (3) exceeded',
+                        );
+                        return false; // Stop retrying
+                    }
+
+                    const delay = Math.min(retries * 1000, 5000);
+                    this.logger.warn(
+                        `Redis connection retry ${retries}/3 in ${delay}ms`,
+                    );
+                    return delay;
+                },
+                connectTimeout: 10000, // 10 second connection timeout
+            },
+        };
+
+        this.client = createClient(clientOptions);
         this.logger.log('Redis connected');
 
         this.publisher = this.client.duplicate();
@@ -72,6 +97,10 @@ export class RedisService {
         }
     }
 
+    /**
+     * Checks the health of the Redis connection.
+     * @returns { status: string; latency?: number }
+     */
     async checkHealth(): Promise<{ status: string; latency?: number }> {
         if (!this.client?.isOpen) return { status: 'down' };
 
@@ -90,6 +119,12 @@ export class RedisService {
         return this.client;
     }
 
+    /**
+     * Sets a value in Redis with an optional TTL.
+     * @param key The key to set.
+     * @param value The value to set.
+     * @param ttl The time-to-live in seconds. If not provided, uses default TTL.
+     */
     async set(key: string, value: string, ttl?: number) {
         if (!this.client) {
             throw new Error('Redis client is not initialized');
@@ -98,6 +133,11 @@ export class RedisService {
         await this.client.set(key, value, { EX: ttl ?? this.options.ttl });
     }
 
+    /**
+     * Retrieves a value from Redis.
+     * @param key The key to retrieve.
+     * @returns The value associated with the key, or null if not found.
+     */
     async get(key: string): Promise<string | null> {
         if (!this.client) {
             throw new Error('Redis client is not initialized');
@@ -105,6 +145,10 @@ export class RedisService {
         return this.client.get(key);
     }
 
+    /**
+     * Deletes a value from Redis.
+     * @param key The key to delete.
+     */
     async del(key: string) {
         if (!this.client) {
             throw new Error('Redis client is not initialized');
