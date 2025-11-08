@@ -136,7 +136,7 @@
 
 ## 1.2 Database Schema & Models
 
-### ⏳ Task 1.2.1: Design Database Schema
+### ✅ Task 1.2.1: Design Database Schema
 **Complexity**: Medium
 **Priority**: P0 (Critical)
 **Estimated Time**: 4 hours
@@ -145,7 +145,7 @@
 
 **Acceptance Criteria**:
 <!-- - [ ] Create ERD (Entity Relationship Diagram) with Draw.io | there's no relationships yet -->
-- [ ] Define `registered_apps` table with all fields
+- [x] Define `registered_apps` table with all fields
 - [x] Document schema in `docs/database-schema.md`
 
 **Dependencies**: Task 1.1.3
