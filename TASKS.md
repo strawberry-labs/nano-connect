@@ -152,43 +152,45 @@
 
 ---
 
-### ⏳ Task 1.2.2: Create Session Entity
+### ⏳ Task 1.2.2: Create Session Redis Schema
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 2 hours
 
-**Description**: Implement TypeORM entity for sessions table.
+**Description**: Implement Redis data structures and operations for session management.
 
 **Acceptance Criteria**:
-- [ ] Create `src/session/entities/session.entity.ts`
-- [ ] Define all columns with proper TypeORM decorators
-- [ ] Add custom enum types for `state`
-- [ ] Add `@Index` decorators for indexed columns
-- [ ] Implement `toJSON()` method to exclude sensitive fields
-- [ ] Add validation decorators from `class-validator`
-- [ ] Add timestamps (created_at, updated_at) with decorators
-- [ ] Export entity from module
+- [ ] Create `src/redis/session.schema.ts`
+- [ ] Define Redis key patterns for sessions (e.g., `session:{id}`)
+- [ ] Implement session state enum (pending, active, completed, expired)
+- [ ] Create methods for session CRUD operations using Redis hashes
+- [ ] Add Redis indexing for session lookups by user/application
+- [ ] Implement session expiration using Redis TTL
+- [ ] Add methods to exclude sensitive fields from responses
+- [ ] Add validation for session data structures
+- [ ] Export service from module
 
 **Dependencies**: Task 1.2.1
 
 ---
 
-### ⏳ Task 1.2.3: Create Message Entity
+### ⏳ Task 1.2.3: Create Message Redis Schema
 **Complexity**: Simple
 **Priority**: P0 (Critical)
 **Estimated Time**: 2 hours
 
-**Description**: Implement TypeORM entity for messages table.
+**Description**: Implement Redis data structures and operations for message management.
 
 **Acceptance Criteria**:
-- [ ] Create `src/message/entities/message.entity.ts`
-- [ ] Define all columns with TypeORM decorators
-- [ ] Add custom enum for `type`
-- [ ] Use JSONB for `payload` column
-- [ ] Add validation decorators
-- [ ] Add TTL calculation helper method
-- [ ] Add `isExpired()` method based on timestamp + ttl
-- [ ] Export entity from module
+- [ ] Create `src/redis/message.schema.ts`
+- [ ] Define Redis key patterns for messages (e.g., `message:{id}`, `session:{sessionId}:messages`)
+- [ ] Implement message type enum (request, response, error, system)
+- [ ] Use Redis hashes for message payload storage
+- [ ] Add validation for message data structures
+- [ ] Implement automatic TTL expiration for messages
+- [ ] Create helper methods for TTL calculation and validation
+- [ ] Add `isExpired()` method checking Redis TTL
+- [ ] Export service from module
 
 **Dependencies**: Task 1.2.1
 
