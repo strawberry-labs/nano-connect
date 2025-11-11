@@ -160,8 +160,8 @@
 **Description**: Implement Redis data structures and operations for session management.
 
 **Acceptance Criteria**:
-- [ ] Create `src/redis/session.schema.ts`
-- [ ] Define Redis key patterns for sessions (e.g., `session:{id}`)
+- [x] Create `src/redis/session.schema.ts`
+- [x] Define Redis key patterns for sessions (e.g., `session:{id}`)
 - [ ] Implement session state enum (pending, active, completed, expired)
 - [ ] Create methods for session CRUD operations using Redis hashes
 - [ ] Add Redis indexing for session lookups by user/application
@@ -182,14 +182,13 @@
 **Description**: Implement Redis data structures and operations for message management.
 
 **Acceptance Criteria**:
-- [ ] Create `src/redis/message.schema.ts`
-- [ ] Define Redis key patterns for messages (e.g., `message:{id}`, `session:{sessionId}:messages`)
+- [x] Create `src/redis/message.schema.ts`
+- [x] Define Redis key patterns for messages (e.g., `message:{id}`, `session:{sessionId}:messages`)
 - [ ] Implement message type enum (request, response, error, system)
-- [ ] Use Redis hashes for message payload storage
+- [x] Use Redis hashes for message payload storage
 - [ ] Add validation for message data structures
-- [ ] Implement automatic TTL expiration for messages
+- [x] Implement automatic TTL expiration for messages
 - [ ] Create helper methods for TTL calculation and validation
-- [ ] Add `isExpired()` method checking Redis TTL
 - [ ] Export service from module
 
 **Dependencies**: Task 1.2.1
