@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@walletconnect/relay-api": "^1.0.11"
+  }
+}
