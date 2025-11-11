@@ -9,6 +9,9 @@ import {
     RespVersions,
     TypeMapping,
 } from 'redis';
+import { redisMessageHash } from 'src/utils';
+// TODO: change to some custom library that'll work with our setup
+import { RelayJsonRpc } from '@walletconnect/relay-api';
 
 type RedisClient = RedisClientType<
     RedisModules,
@@ -23,11 +26,11 @@ export class RedisService {
     private readonly logger = new Logger(RedisService.name);
 
     // main client
-    private client: RedisClient | undefined;
+    private client!: RedisClient;
 
     // pub/sub clients
-    public publisher: RedisClient | undefined;
-    public subscriber: RedisClient | undefined;
+    public publisher!: RedisClient;
+    public subscriber!: RedisClient;
 
     public streamIds = new Map<string, string>();
 
@@ -154,5 +157,47 @@ export class RedisService {
             throw new Error('Redis client is not initialized');
         }
         await this.client.del(key);
+    }
+
+    public async setMessage(params: RelayJsonRpc.PublishParams): Promise<void> {
+        const { topic, message, ttl } = params;
+        this.logger.debug(`Setting Message`);
+        const key = redisMessageHash(topic, message);
+        await this.client.sAdd(`topic:${topic}`, key);
+        await this.client.set(key, message, { EX: ttl || this.options.ttl });
+        this.logger.debug({
+            type: 'method',
+            method: 'setMessage',
+            key,
+            params,
+        });
+    }
+
+    public async getMessage(key: string): Promise<string | null> {
+        this.logger.debug(`Getting Message`);
+        this.logger.debug({ type: 'method', method: 'getMessage', key });
+        return await this.client.get(key);
+    }
+
+    public async getHashes(topic: string): Promise<string[]> {
+        this.logger.debug(`Getting Hashes`);
+        const hashes: string[] = [];
+        for (const hash of await this.client.sMembers(`topic:${topic}`)) {
+            hashes.push(hash);
+        }
+        this.logger.debug({
+            type: 'method',
+            method: 'getHashes',
+            topic,
+            hashes,
+        });
+        return hashes;
+    }
+
+    public async deleteMessage(topic: string, hash: string): Promise<void> {
+        this.logger.debug(`Deleting Message`);
+        this.logger.debug({ type: 'method', method: 'deleteMessage', topic });
+        await this.client.del(hash);
+        await this.client.sRem(topic, hash);
     }
 }
